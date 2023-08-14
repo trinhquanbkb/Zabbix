@@ -42,7 +42,7 @@ export const axiosBaseQuery =
 	};
 
 const baseQuery = axiosBaseQuery({
-	baseUrl: "https://api.dev.dp-cargo.com",
+	baseUrl: "http://192.168.1.5/zabbix",
 });
 
 // const baseQueryWithReauth: BaseQueryFn<AxiosRequestConfig, unknown, unknown> = async (configs, api, extraOptions) => {
@@ -84,7 +84,7 @@ export const api = createApi({
 		"DefaultCriteria",
 		"Feedback",
 		"Report",
-		"Logs"
+		"Logs",
 	],
 	endpoints: () => ({}),
 });

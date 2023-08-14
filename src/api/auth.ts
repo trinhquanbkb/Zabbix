@@ -2,10 +2,25 @@ import axios from "axios";
 import { getAccessToken } from "../utils/getAccessToken";
 
 export const LoginRequest = async (username: string, password: string) => {
-	const response = await axios.post("api/auth/login", {
-		email: username,
-		password,
-	});
+	let data = {
+		jsonrpc: "2.0",
+		method: "user.login",
+		params: {
+			username: "Admin",
+			password: "zabbix",
+		},
+		id: 1,
+	};
+
+	let config: any = {
+		method: "POST",
+		url: "http://192.168.1.5/zabbix/api_jsonrpc.php",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		data: JSON.stringify(data),
+	};
+	const response = await axios(config);
 	return response;
 };
 

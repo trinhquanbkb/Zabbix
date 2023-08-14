@@ -1,6 +1,5 @@
 import { AxiosResponse } from "axios";
 import { History } from "history";
-import jwtDecode from "jwt-decode";
 import { Cookies } from "react-cookie";
 import { all, call, fork, put, takeEvery } from "redux-saga/effects";
 import { LoginRequest } from "../../api/auth";
@@ -18,7 +17,6 @@ import {
  */
 
 export const setSession = (key?: string, value?: any, httpOnly?: boolean) => {
-	console.log("gsdgsd");
 	let cookies = new Cookies();
 	if (key && value)
 		cookies.set(key, value, {
@@ -39,22 +37,19 @@ export const setSession = (key?: string, value?: any, httpOnly?: boolean) => {
  * @param {*} payload - username and password
  */
 
-function* login(action: { payload: { email: string; password: string } }) {
+function* login(action: { payload: { username: string; password: string } }) {
 	try {
 		const authResponse: AxiosResponse = yield call(
 			LoginRequest,
-			action.payload.email,
+			action.payload.username,
 			action.payload.password
 		);
-		console.log(authResponse.data);
-		const { token, refreshToken } = authResponse.data;
-
+		const token = authResponse.data.result;
+		console.log(token);
 		setCredentials({
 			access_token: token,
-			refresh_token: refreshToken,
-			user: jwtDecode(token),
 		});
-		yield put(loginUserSuccess(jwtDecode(token)));
+		yield put(loginUserSuccess(token));
 	} catch (err) {
 		const message = errorHandler(err);
 		yield put(loginUserFailed(message));

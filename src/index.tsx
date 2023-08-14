@@ -13,7 +13,7 @@ import jwtDecode from "jwt-decode";
 let isRefreshing = false;
 
 // Cai dat baseURL mac dinh cho cac request su dung axios
-axios.defaults.baseURL = "https://api.dev.dp-cargo.com";
+axios.defaults.baseURL = "http://192.168.1.5/zabbix";
 // axios.defaults.headers = { Authorization: `Bearer ${getAccessToken()}` };
 
 // xu ly response tra ve, neu response code = 401, trang thai chua dang nhap, thi thuc hien refresh token

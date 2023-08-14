@@ -34,11 +34,12 @@ const Auth = createSlice({
 	reducers: {
 		initLoginUser: (
 			state,
-			action: PayloadAction<{ email: string; password: string }>
+			action: PayloadAction<{ username: string; password: string }>
 		) => {
 			state.login.loading = true;
 		},
 		loginUserSuccess: (state, action) => {
+			console.log(action.payload);
 			state.login.data.user = action.payload;
 			state.login.loading = false;
 			state.login.error = undefined;

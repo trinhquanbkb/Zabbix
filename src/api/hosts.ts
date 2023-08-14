@@ -1,36 +1,27 @@
 import axios from "axios";
-import { api } from ".";
-import { createAction } from "@reduxjs/toolkit";
+import { getAccessToken } from "../utils/getAccessToken";
 
-export const successToastAction = createAction<string>("toast/success");
-export const failedToastAction = createAction<string>("toast/failed");
-const getInforAllHostApi = api.injectEndpoints({
-	endpoints: (build) => ({
-		getInforAllHostData: build.query<any, void>({
-			query: () => ({
-				url: "",
-				method: "GET",
-                body: {
-                jsonrpc: "2.0",
-                    method: "host.get",
-                    params: {
-                      output: ["hostid", "name", "status", "tls_connect", "tls_accept","active_available"],
-                      selectHosts:"count",
-                      selectItems: "count",
-                      selectTriggers: "count",
-                      selectDiscoveries: "count",
-                      selectGraphs: "count",
-                      selectHttpTests: "count",
-                      selectInterfaces:["ip","port"],
-                      selectParentTemplates: ["name"]
-                      },
-                    auth: null,
-                    id: 1
-                }
-                  
-			}),
-		}),
-	}),
-});
+export const getInforAllHostApi = async () => {
+	let data = {
+		jsonrpc: "2.0",
+		method: "host.get",
+		params: {
+			output: "extend",
+			selectInterfaces: "extend",
+		},
+		id: 1,
+	};
 
-export const { useGetInforAllHostDataQuery } = getInforAllHostApi;
+	let config: any = {
+		method: "GET",
+		url: "http://192.168.1.5/zabbix/api_jsonrpc.php",
+		headers: {
+			"Content-Type": "application/json",
+			Authorization: "Bearer 9cb11402eb7b85eff6de0f5eea53c451",
+		},
+		data: JSON.stringify(data),
+	};
+	const response = await axios.request(config);
+	console.log(response);
+	return response;
+};
