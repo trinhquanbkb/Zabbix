@@ -3,7 +3,7 @@ import React from "react";
 // components
 import PageTitle from "../../components/PageTitle";
 
-const OrderManager = () => {
+const TrackingManager = () => {
   return (
     <>
       <PageTitle
@@ -17,4 +17,4 @@ const OrderManager = () => {
   );
 };
 
-export default OrderManager;
+export default TrackingManager;

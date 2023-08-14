@@ -14,6 +14,13 @@ const Confirm = React.lazy(() => import("../pages/auth/Confirm"));
 const ForgetPassword = React.lazy(() => import("../pages/auth/ForgetPassword"));
 const LockScreen = React.lazy(() => import("../pages/auth/LockScreen"));
 
+// data collection
+const HostGroup = React.lazy(() => import("../pages/tracking copy/index"));
+const TemplateGroup = React.lazy(
+	() => import("../pages/tracking copy/TemplateGroup")
+);
+const Hosts = React.lazy(() => import("../pages/tracking copy/Hosts"));
+
 // dashboard
 const EcommerceDashboard = React.lazy(
 	() => import("../pages/dashboard/Ecommerce")
@@ -33,10 +40,9 @@ const TrackingDetail = React.lazy(
 );
 const TrackingList = React.lazy(() => import("../pages/tracking/index"));
 const TrackingManager = React.lazy(() => import("../pages/tracking/Manager"));
-// order
-const OrderDetail = React.lazy(() => import("../pages/order/Detail/index"));
-const OrderList = React.lazy(() => import("../pages/order/index"));
-const OrderManager = React.lazy(() => import("../pages/order/Manager"));
+const LatestData = React.lazy(() => import("../pages/tracking/LatestData"));
+const Problem = React.lazy(() => import("../pages/tracking/Problem"));
+
 // customer
 const CustomerDetail = React.lazy(
 	() => import("../pages/customers/Detail/index")
@@ -145,49 +151,49 @@ const projectAppRoutes: RoutesProps[] = [
 
 		children: [
 			{
-				path: "/tracking/list",
+				path: "/monitoring/hosts",
 				name: "Tracking List",
 				component: TrackingList,
 				route: PrivateRoute,
 			},
 			{
-				path: "/tracking/details",
+				path: "/monitoring/latest-data",
 				name: "Tracking Detail",
-				component: TrackingDetail,
+				component: LatestData,
 				route: PrivateRoute,
 			},
 			{
-				path: "/tracking/manager",
+				path: "/monitoring/problem",
 				name: "Tracking Detail",
-				component: TrackingManager,
+				component: Problem,
 				route: PrivateRoute,
 			},
 		],
 	},
 	{
-		path: "/order",
-		name: "Orer",
+		path: "/data-collection",
+		name: "Data collection",
 		route: PrivateRoute,
 		roles: ["Admin"],
 		icon: "uil-briefcase",
 
 		children: [
 			{
-				path: "/order/list",
-				name: "Order List",
-				component: OrderList,
+				path: "/data-collection/host-groups",
+				name: "Host groups",
+				component: HostGroup,
 				route: PrivateRoute,
 			},
 			{
-				path: "/order/details",
-				name: "Order Detail",
-				component: OrderDetail,
+				path: "/data-collection/hosts",
+				name: "Hosts",
+				component: Hosts,
 				route: PrivateRoute,
 			},
 			{
-				path: "/order/manager",
-				name: "Order Detail",
-				component: OrderManager,
+				path: "/data-collection/template-groups",
+				name: "Template groups",
+				component: TemplateGroup,
 				route: PrivateRoute,
 			},
 		],
